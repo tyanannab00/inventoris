@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Generate PDF";
+}
+
+<h1>Generate PDF</h1>
+<div class="mb-3">
+    <a href="@Url.Action("GeneratePDF", "Barang")" class="btn btn-primary">Generate PDF</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID Barang</th>
+            <th>Nama Barang</th>
+            <th>Harga Barang</th>
+            <th>Stok</th>
+            <th>Kategori ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var barang in Model)
+        {
+            <tr>
+                <td>@barang.IdBarang</td>
+                <td>@barang.NamaBarang</td>
+                <td>@barang.HargaBarang</td>
+                <td>@barang.Stok</td>
+                <td>@barang.KategoriId</td>
+            </tr>
+        }
+    </tbody>
+</table>

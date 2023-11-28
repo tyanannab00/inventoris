@@ -1,12 +1,10 @@
-﻿@model List<UAS_Inventoris.Models.Barang>
-
-<!-- Tambahkan referensi ke Bootstrap CSS -->
+﻿<!-- Tambahkan referensi ke Bootstrap CSS -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="mb-3">
     <a href="@Url.Action("Tambah", "Barang")" class="btn btn-success">Tambah Barang</a>
+    <a href="@Url.Action("GeneratePDF", "Barang")" class="btn btn-primary">Generate PDF</a> <!-- Tambahkan tombol untuk generate PDF -->
 </div>
-
 
 <h1>Daftar Barang</h1>
 
@@ -19,25 +17,23 @@
             <th>Harga Barang</th>
             <th>Stok</th>
             <th>Kategori ID</th>
-            <th>Actions</th> <!-- Kolom baru untuk menampilkan tombol aksi -->
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var barang in Model)
         {
-            <tr>
-                <td>@barang.IdBarang</td>
-                <td>@barang.NamaBarang</td>
-                <td>@barang.HargaBarang</td>
-                <td>@barang.Stok</td>
-                <td>@barang.KategoriId</td>
-                <td>
-                    <!-- Tombol Edit -->
-                    <a href="@Url.Action("Edit", "Barang", new { id = barang.IdBarang })" class="btn btn-primary btn-sm">Edit</a>
-                    <!-- Tombol Delete -->
-                    <a href="@Url.Action("Delete", "Barang", new { id = barang.IdBarang })" class="btn btn-danger btn-sm">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@barang.IdBarang</td>
+                    <td>@barang.NamaBarang</td>
+                    <td>@barang.HargaBarang</td>
+                    <td>@barang.Stok</td>
+                    <td>@barang.KategoriId</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Barang", new { id = barang.IdBarang })" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="@Url.Action("Delete", "Barang", new { id = barang.IdBarang })" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
         }
     </tbody>
 </table>

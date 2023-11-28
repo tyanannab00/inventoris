@@ -6,6 +6,12 @@ using System.Collections.Generic;
 using UAS_Inventoris.Models;
 using MySqlCommand = MySql.Data.MySqlClient.MySqlCommand;
 using MySqlConnection = MySql.Data.MySqlClient.MySqlConnection;
+using iText.Kernel;
+using iText.Layout;
+using iText.Kernel.Pdf;
+using iText.Layout.Properties;
+using iText.Layout.Element;
+
 
 public class BarangController : Controller
 {
@@ -154,6 +160,70 @@ public class BarangController : Controller
 
         return RedirectToAction(nameof(DaftarBarang)); // Redirect kembali ke halaman daftar barang setelah penghapusan berhasil
     }
+    public IActionResult GeneratePDF()
+    {
+        List<Barang> daftarBarang = new List<Barang>();
+
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            var query = "SELECT * FROM tbl_barang";
+
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Barang barang = new Barang
+                        {
+                            IdBarang = Convert.ToInt32(reader["id_barang"]),
+                            NamaBarang = reader["nama_barang"].ToString(),
+                            HargaBarang = Convert.ToDecimal(reader["harga_barang"]),
+                            Stok = Convert.ToInt32(reader["stok"]),
+                            KategoriId = Convert.ToInt32(reader["kategori_id"])
+                        };
+
+                        daftarBarang.Add(barang);
+                    }
+                }
+            }
+        }
+
+        // Buat dokumen PDF baru
+        MemoryStream memoryStream = new MemoryStream();
+        PdfWriter writer = new PdfWriter(memoryStream);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf);
+
+        // Tambahkan konten ke dokumen PDF
+        Table table = new Table(UnitValue.CreatePercentArray(5)).UseAllAvailableWidth();
+
+        // Tambahkan header tabel
+        table.AddHeaderCell("ID Barang");
+        table.AddHeaderCell("Nama Barang");
+        table.AddHeaderCell("Harga Barang");
+        table.AddHeaderCell("Stok");
+        table.AddHeaderCell("Kategori ID");
+
+        // Tambahkan isi tabel dari daftarBarang
+        foreach (var barang in daftarBarang)
+        {
+            table.AddCell(barang.IdBarang.ToString());
+            table.AddCell(barang.NamaBarang);
+            table.AddCell(barang.HargaBarang.ToString());
+            table.AddCell(barang.Stok.ToString());
+            table.AddCell(barang.KategoriId.ToString());
+        }
+
+        doc.Add(table);
+        doc.Close();
+
+        // Kirim file PDF sebagai respons
+        return File(memoryStream.ToArray(), "application/pdf", "DaftarBarang.pdf");
+    }
 
 
 }
+

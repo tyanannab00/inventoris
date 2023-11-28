@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UAS Inventoris")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2eedff574b7e4b04042941b9d140770b9b3b7d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("UAS Inventoris")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UAS Inventoris")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

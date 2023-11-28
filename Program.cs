@@ -25,3 +25,4 @@ app.MapControllerRoute(
     pattern: "{controller=Barang}/{action=DaftarBarang}/{id?}");
 
 app.Run();
+
