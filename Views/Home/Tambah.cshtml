@@ -1,0 +1,34 @@
+﻿@model UAS_Inventoris.Models.Barang
+
+<!-- Tambahkan referensi ke Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<h1>Tambah Barang</h1>
+
+<form asp-action="Tambah" method="post">
+    <div class="form-group">
+        <label asp-for="NamaBarang">Nama Barang</label>
+        <input asp-for="NamaBarang" class="form-control" />
+        <span asp-validation-for="NamaBarang" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HargaBarang">Harga Barang</label>
+        <input asp-for="HargaBarang" class="form-control" />
+        <span asp-validation-for="HargaBarang" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Stok">Stok</label>
+        <input asp-for="Stok" class="form-control" />
+        <span asp-validation-for="Stok" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KategoriId">Kategori ID</label>
+        <input asp-for="KategoriId" class="form-control" />
+        <span asp-validation-for="KategoriId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+</form>

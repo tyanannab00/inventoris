@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\UAS Inventoris.props" />
+</Project>

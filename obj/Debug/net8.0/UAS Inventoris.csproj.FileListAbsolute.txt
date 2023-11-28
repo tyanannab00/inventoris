@@ -1,0 +1,56 @@
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\appsettings.Development.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\appsettings.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.staticwebassets.runtime.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.exe
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.deps.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.runtimeconfig.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\UAS Inventoris.pdb
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.GeneratedMSBuildEditorConfig.editorconfig
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.AssemblyInfoInputs.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.AssemblyInfo.cs
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.csproj.CoreCompileInputs.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.MvcApplicationPartsAssemblyInfo.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.RazorAssemblyInfo.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.RazorAssemblyInfo.cs
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets.build.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets.development.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets\msbuild.UAS Inventoris.Microsoft.AspNetCore.StaticWebAssets.props
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets\msbuild.build.UAS Inventoris.props
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.UAS Inventoris.props
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.UAS Inventoris.props
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\staticwebassets.pack.json
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\scopedcss\bundle\UAS Inventoris.styles.css
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\scopedcss\projectbundle\UAS Inventoris.bundle.scp.css
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\refint\UAS Inventoris.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.pdb
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.genruntimeconfig.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\ref\UAS Inventoris.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\Google.Protobuf.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\MySql.Data.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\MySqlConnector.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\ZstdSharp.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.csproj.AssemblyReference.cache
+D:\inventoris\UAS Inventoris\UAS Inventoris\obj\Debug\net8.0\UAS Inventoris.csproj.CopyComplete
