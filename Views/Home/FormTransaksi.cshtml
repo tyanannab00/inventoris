@@ -1,0 +1,120 @@
+﻿@model DetailTransaksi
+
+<h1>Form Transaksi</h1>
+
+<form onsubmit="buatTransaksi(); return false;">
+    <div class="form-group">
+        <label for="namaBarang">Nama Barang:</label>
+        <select class="form-control" id="namaBarang" onchange="getBarangDetails()">
+            <!-- Daftar nama barang akan dimuat disini saat halaman dimuat -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="stok">Stok:</label>
+        <input type="text" class="form-control" id="stok" readonly />
+    </div>
+    <div class="form-group">
+        <label for="hargaSatuan">Harga Satuan:</label>
+        <input type="text" class="form-control" id="hargaSatuan" readonly />
+    </div>
+    <div class="form-group">
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" class="form-control" id="jumlah" onchange="calculateTotal()" />
+    </div>
+    <div class="form-group">
+        <label for="total">Total:</label>
+        <input type="text" class="form-control" id="total" readonly />
+    </div>
+    <button type="submit" class="btn btn-primary">Buat Transaksi</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/Barang/GetDaftarNamaBarang',
+            type: 'GET',
+            success: function(response) {
+                var dropdown = $('#namaBarang');
+                dropdown.empty();
+                $.each(response, function(index, value) {
+                    dropdown.append($('<option></option>').attr('value', value).text(value));
+                });
+            },
+            error: function() {
+                alert('Gagal memuat daftar nama barang.');
+            }
+        });
+    });
+
+    function getBarangDetails() {
+        var namaBarang = $('#namaBarang').val();
+
+        $.ajax({
+            url: '/Barang/GetDetailBarang',
+            type: 'GET',
+            data: { namaBarang: namaBarang },
+            success: function(response) {
+                $('#stok').val(response.stok);
+                $('#hargaSatuan').val(response.hargaSatuan);
+                calculateTotal();
+            },
+            error: function() {
+                alert('Gagal memperoleh detail barang.');
+            }
+        });
+    }
+
+    function calculateTotal() {
+        var jumlah = $('#jumlah').val();
+        var hargaSatuan = $('#hargaSatuan').val();
+
+        var total = jumlah * hargaSatuan;
+        $('#total').val(total);
+    }
+
+    function buatTransaksi() {
+        var namaBarang = $('#namaBarang').val();
+        var jumlah = $('#jumlah').val();
+
+        $.ajax({
+            url: '/Barang/BuatTransaksi',
+            type: 'POST',
+            data: {
+                NamaBarang: namaBarang,
+                Jumlah: jumlah
+            },
+            success: function(response) {
+                alert(response);
+                // Lakukan tindakan lain setelah transaksi berhasil
+            },
+            error: function() {
+                alert('Gagal membuat transaksi');
+            }
+        });
+    }
+
+    function buatTransaksi() {
+    var namaBarang = $('#namaBarang').val();
+    var jumlah = $('#jumlah').val();
+
+    $.ajax({
+        url: '/Barang/BuatTransaksi',
+        type: 'POST',
+        data: {
+            NamaBarang: namaBarang,
+            Jumlah: jumlah
+        },
+        success: function(response) {
+            alert(response); // Menampilkan pesan konfirmasi
+
+            // Redirect ke DaftarBarang setelah pesan ditampilkan
+            window.location.href = '/Barang/DaftarBarang'; // Ganti NamaController dengan nama controller yang sesuai
+        },
+        error: function() {
+            alert('Gagal membuat transaksi');
+        }
+    });
+}
+
+</script>

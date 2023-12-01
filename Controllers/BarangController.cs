@@ -224,6 +224,157 @@ public class BarangController : Controller
         return File(memoryStream.ToArray(), "application/pdf", "DaftarBarang.pdf");
     }
 
+    public IActionResult FormTransaksi()
+    {
+        return View("~/Views/Home/FormTransaksi.cshtml");
+    }
+
+    public IActionResult GetDaftarNamaBarang()
+    {
+        List<string> daftarNamaBarang = new List<string>();
+
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            var query = "SELECT nama_barang FROM tbl_barang";
+
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string namaBarang = reader["nama_barang"].ToString();
+                        daftarNamaBarang.Add(namaBarang);
+                    }
+                }
+            }
+        }
+
+        return Json(daftarNamaBarang);
+    }
+
+    public IActionResult GetDetailBarang(string namaBarang)
+    {
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            var query = $"SELECT stok, harga_barang FROM tbl_barang WHERE nama_barang = '{namaBarang}'";
+
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var detailBarang = new
+                        {
+                            stok = Convert.ToInt32(reader["stok"]),
+                            hargaSatuan = Convert.ToDecimal(reader["harga_barang"])
+                        };
+                        reader.Close(); // Tutup DataReader setelah selesai membaca
+                        return Json(detailBarang);
+                    }
+                }
+            }
+        }
+
+        return NotFound();
+    }
+
+    [HttpPost]
+    public IActionResult BuatTransaksi(DetailTransaksi transaksi)
+    {
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            // Ambil informasi barang dari tabel tbl_barang
+            string getBarangQuery = $"SELECT id_barang, harga_barang, stok FROM tbl_barang WHERE nama_barang = '{transaksi.NamaBarang}'";
+            using (MySqlCommand getBarangCommand = new MySqlCommand(getBarangQuery, connection))
+            {
+                using (var reader = getBarangCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        int barangId = Convert.ToInt32(reader["id_barang"]);
+                        decimal hargaSatuan = Convert.ToDecimal(reader["harga_barang"]);
+                        int stok = Convert.ToInt32(reader["stok"]);
+
+                        // Update nilai transaksi dengan data yang didapat dari frontend
+                        transaksi.BarangId = barangId;
+                        transaksi.HargaSatuan = hargaSatuan;
+                        transaksi.Total = transaksi.Jumlah * hargaSatuan;
+
+                        // Tutup DataReader setelah selesai membaca
+                        reader.Close();
+
+                        // Mengurangi stok barang
+                        string updateStokQuery = $"UPDATE tbl_barang SET stok = stok - {transaksi.Jumlah} WHERE id_barang = {barangId}";
+                        using (MySqlCommand updateStokCommand = new MySqlCommand(updateStokQuery, connection))
+                        {
+                            updateStokCommand.ExecuteNonQuery();
+                        }
+
+                        // Insert informasi transaksi ke dalam tabel tbl_transaksi
+                        // Mendefinisikan pernyataan SQL dengan parameter
+                        string insertTransaksiQuery = "INSERT INTO tbl_transaksi (date, total) VALUES (@Date, @Total)";
+
+                        using (MySqlCommand insertTransaksiCommand = new MySqlCommand(insertTransaksiQuery, connection))
+                        {
+                            // Mengatur parameter dengan tipe data yang sesuai
+                            insertTransaksiCommand.Parameters.AddWithValue("@Date", DateTime.Now.ToString("yyyy-MM-dd")); // Format tanggal YYYY-MM-DD
+                            insertTransaksiCommand.Parameters.AddWithValue("@Total", transaksi.Total);
+
+                            // Melakukan eksekusi pernyataan SQL
+                            insertTransaksiCommand.ExecuteNonQuery();
+                        }
+
+
+                        // Ambil id transaksi yang baru saja diinsert
+                        string getLastInsertedIdQuery = "SELECT LAST_INSERT_ID()";
+                        using (MySqlCommand getLastInsertedIdCommand = new MySqlCommand(getLastInsertedIdQuery, connection))
+                        {
+                            int transaksiId = Convert.ToInt32(getLastInsertedIdCommand.ExecuteScalar());
+
+                            // Memasukkan detail transaksi ke dalam tabel tbl_detail_transaksi
+                            string insertDetailTransaksiQuery = "INSERT INTO tbl_detail_transaksi (transaksi_id, barang_id, nama_barang, jumlah, harga_satuan, total) VALUES (@TransaksiId, @BarangId, @NamaBarang, @Jumlah, @HargaSatuan, @Total)";
+                            using (MySqlCommand insertDetailTransaksiCommand = new MySqlCommand(insertDetailTransaksiQuery, connection))
+                            {
+                                // Set parameter untuk nilai-nilai yang akan dimasukkan
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@TransaksiId", transaksiId);
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@BarangId", transaksi.BarangId);
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@NamaBarang", transaksi.NamaBarang);
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@Jumlah", transaksi.Jumlah);
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@HargaSatuan", transaksi.HargaSatuan);
+                                insertDetailTransaksiCommand.Parameters.AddWithValue("@Total", transaksi.Total);
+
+                                int rowsAffected = insertDetailTransaksiCommand.ExecuteNonQuery();
+                                if (rowsAffected > 0)
+                                {
+                                    return Ok("Transaksi berhasil");
+                                }
+                                else
+                                {
+                                    return BadRequest("Gagal membuat transaksi");
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        reader.Close(); // Tutup DataReader jika barang tidak ditemukan
+                        return NotFound("Barang tidak ditemukan");
+                    }
+                }
+            }
+        }
+    }
+
 
 }
+
 
