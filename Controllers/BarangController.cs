@@ -374,6 +374,77 @@ public class BarangController : Controller
         }
     }
 
+    public IActionResult GenerateDetailTransaksiPDF()
+    {
+        List<DetailTransaksi> daftarDetailTransaksi = new List<DetailTransaksi>();
+
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            var query = "SELECT * FROM tbl_detail_transaksi";
+
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DetailTransaksi detailTransaksi = new DetailTransaksi
+                        {
+                            DetailId = Convert.ToInt32(reader["detail_id"]),
+                            TransaksiId = Convert.ToInt32(reader["transaksi_id"]),
+                            BarangId = Convert.ToInt32(reader["barang_id"]),
+                            NamaBarang = reader["nama_barang"].ToString(),
+                            Jumlah = Convert.ToInt32(reader["jumlah"]),
+                            HargaSatuan = Convert.ToDecimal(reader["harga_satuan"]),
+                            Total = Convert.ToDecimal(reader["total"])
+                        };
+
+                        daftarDetailTransaksi.Add(detailTransaksi);
+                    }
+                }
+            }
+        }
+
+        // Buat dokumen PDF baru
+        MemoryStream memoryStream = new MemoryStream();
+        PdfWriter writer = new PdfWriter(memoryStream);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf);
+
+        // Tambahkan konten ke dokumen PDF
+        Table table = new Table(UnitValue.CreatePercentArray(7)).UseAllAvailableWidth();
+
+        // Tambahkan header tabel
+        table.AddHeaderCell("ID Detail");
+        table.AddHeaderCell("ID Transaksi");
+        table.AddHeaderCell("ID Barang");
+        table.AddHeaderCell("Nama Barang");
+        table.AddHeaderCell("Jumlah");
+        table.AddHeaderCell("Harga Satuan");
+        table.AddHeaderCell("Total");
+
+        // Tambahkan isi tabel dari daftarDetailTransaksi
+        foreach (var detailTransaksi in daftarDetailTransaksi)
+        {
+            table.AddCell(detailTransaksi.DetailId.ToString());
+            table.AddCell(detailTransaksi.TransaksiId.ToString());
+            table.AddCell(detailTransaksi.BarangId.ToString());
+            table.AddCell(detailTransaksi.NamaBarang);
+            table.AddCell(detailTransaksi.Jumlah.ToString());
+            table.AddCell(detailTransaksi.HargaSatuan.ToString());
+            table.AddCell(detailTransaksi.Total.ToString());
+        }
+
+        doc.Add(table);
+        doc.Close();
+
+        // Kirim file PDF sebagai respons
+        return File(memoryStream.ToArray(), "application/pdf", "DetailTransaksi.pdf");
+    }
+
+
 
 }
 
